@@ -5,24 +5,13 @@
 // Allow the user to enter a new campaign contribution for 2016 and have #1,2,3 update with the newly entered data
 d3.csv('cand.csv', function (candData) {
   d3.csv('contrib.csv', function (contribData) {
-    console.log(candData[0])
-    console.log(contribData[0])
 
-    d3.select('body')
-      .data(candData)
-      .enter()
-      .append('p')
-      .text(function(d) { return d.first_last_party; });
 
-    // d3.select('bar')
-    //   .data(contribData)
+    // d3.select('body')
+    //   .data(candData)
     //   .enter()
-    //   .append('div')
-    //   .attr('class', 'bar')
-    //   .style('height', function(d) {
-    //     var barHeight = d.amount / 1000;
-    //     return barHeight + 'px';
-    //   });
+    //   .append('p')
+    //   .text(function(d) { return d.first_last_party; });
 
   });
 });
