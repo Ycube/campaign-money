@@ -19,3 +19,5 @@ d3.xhr("http://localhost:3333/candidates", function (data) {
               .append('p')
               .text(function(d) { return d.first_last_party });
 });
+
+// db.xhr("http")

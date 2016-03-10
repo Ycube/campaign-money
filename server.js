@@ -1,52 +1,48 @@
 var express = require('express');
 var app = express();
 var PORT = process.env.PORT || 3333;
-var db = require('../sqlite.js');
+var db = require('./sqlite.js');
 
 app.set('port', PORT)
 app.use(express.static(__dirname + '/../public'));
 
 app.get('/', function (req, res) {
-
   db.serialize(function() {
       db.all('SELECT * from CANDIDATES LIMIT 10', function(err, row) {
-        if (err) { console.log(err); 
+        if (err) { 
+          console.log(err); 
         } else {
-          console.log(row) 
           res.send(row); 
         }
     })
   })
-})
+});
 
 app.get('/contributions', function (req, res) {
-
   db.serialize(function() {
       db.all('SELECT * from CONTRIBUTIONS LIMIT 10', function(err, row) {
-        if (err) { console.log(err); 
+        if (err) { 
+          console.log(err); 
         } else {
-          console.log(row) 
-          res.json({"row" : row}); 
+          res.json(row); 
         }
     })
   })
-})
+});
 
-app.get('/totalContributions', function (req, res) {
-
+//returns top 10 candidates by contributions
+app.get('/topCandidates', function (req, res) {
   db.serialize(function() {
-    // http://stackoverflow.com/questions/9574721/using-sum-in-an-sql-query
-      db.all('select candidates.cid, contributions.cid from candidates, contributions where candidates.cid = contributions.cid LIMIT 10', function(err, row) {
-        if (err) { console.log(err); 
-        } else {
-          console.log(row) 
-          res.json({"row" : row}); 
-        }
+    db.all('SELECT a.first_last_party name, SUM(b.amount) as value from CANDIDATES a INNER JOIN CONTRIBUTIONS b on a.cid = b.cid GROUP BY a.cid, a.first_last_party ORDER BY VALUE DESC limit 10;', function(err, row) {
+      if (err) {
+        console.log(err); 
+      } else {
+        console.log(row);
+        res.json(row);
+      }
     })
-  }))
-
-
-
+  })
+})
 
 app.listen(PORT);
 console.log('App listening on port: ', PORT);
