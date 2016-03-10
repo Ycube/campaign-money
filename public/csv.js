@@ -3,16 +3,16 @@
 // What is the total amount donated to each party?
 // Allow the user to toggle between different election cycles (2012, 2014) and have #1,2,3 update with data for that cycle 
 // Allow the user to enter a new campaign contribution for 2016 and have #1,2,3 update with the newly entered data
-d3.csv('cand.csv', function (candData) {
-  d3.csv('contrib.csv', function (contribData) {
+// d3.csv('cand.csv', function (candData) {
+//   d3.csv('contrib.csv', function (contribData) {
 
 
-    // d3.select('body')
-    //   .data(candData)
-    //   .enter()
-    //   .append('p')
-    //   .text(function(d) { return d.first_last_party; });
+//     // d3.select('body')
+//     //   .data(candData)
+//     //   .enter()
+//     //   .append('p')
+//     //   .text(function(d) { return d.first_last_party; });
 
-  });
-});
+//   });
+// });
 
